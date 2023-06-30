@@ -1,41 +1,42 @@
 <div class="calculator">
-    <h2 class="calculator__item calculator__title">Calculator</h2>
+  <h2 class="calculator__item calculator__title">Calculator</h2>
 
+  <form (ngSubmit)="calculate()">
     <div class="calculator__item calculator_operation">
-        <label for="operand1">Operand 1:
-          <input type="number" id="operand1" [(ngModel)]="operand1">
-        </label>
-      
-        <label for="operand2">Operand 2:
-          <input type="number" id="operand2" [(ngModel)]="operand2">
-        </label>
-      
-        <label for="operation">Operation:
-          <select id="operation" [(ngModel)]="selectedOperation">
-            <option value="+">Addition (+)</option>
-            <option value="/">Division (/)</option>
-            <option value="%">Remainder (%)</option>
-            <option value="prime">Highest Prime</option>
-          </select>
-        </label>
-      
-        <button (click)="calculate()">Calculate</button>
-    </div>
+      <label for="operand1">Operand 1:
+        <input type="number" id="operand1" [(ngModel)]="operand1" name="operand1" required>
+      </label>
 
-  
-    <table class="calculator__item calculator__table">
-      <tr>
-        <th>Operand 1</th>
-        <th>Operand 2</th>
-        <th>Operation</th>
-        <th>Result</th>
-      </tr>
-      <tr *ngFor="let calculation of calculations">
-        <td>{{ calculation.operand1 }}</td>
-        <td>{{ calculation.operand2 }}</td>
-        <td>{{ calculation.operation }}</td>
-        <td>{{ calculation.result }}</td>
-      </tr>
-    </table>
-  </div>
-  
+      <label for="operand2">Operand 2:
+        <input type="number" id="operand2" [(ngModel)]="operand2" name="operand2" required>
+      </label>
+
+      <label for="operation">Operation:
+        <select id="operation" [(ngModel)]="selectedOperation" name="operation" required>
+          <option value="+">Addition (+)</option>
+          <option value="/">Division (/)</option>
+          <option value="%">Remainder (%)</option>
+          <option value="prime">Highest Prime</option>
+        </select>
+      </label>
+
+      <button type="submit">Calculate</button>
+    </div>
+  </form>
+
+
+  <table class="calculator__item calculator__table">
+    <tr>
+      <th>Operand 1</th>
+      <th>Operand 2</th>
+      <th>Operation</th>
+      <th>Result</th>
+    </tr>
+    <tr *ngFor="let calculation of calculations">
+      <td>{{ calculation.operand1 }}</td>
+      <td>{{ calculation.operand2 }}</td>
+      <td>{{ calculation.operation }}</td>
+      <td>{{ calculation.result }}</td>
+    </tr>
+  </table>
+</div>
