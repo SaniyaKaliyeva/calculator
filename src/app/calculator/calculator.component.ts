@@ -4,7 +4,7 @@ interface Calculation {
   operand1: number;
   operand2: number;
   operation: string;
-  result: number;
+  result: number | string;
 }
 
 @Component({
@@ -19,16 +19,16 @@ export class CalculatorComponent {
   calculations: Calculation[] = [];
 
   calculate(): void {
-    let result: number;
+    let result: number | string;
     switch (this.selectedOperation) {
       case '+':
         result = this.operand1 + this.operand2;
         break;
       case '/':
-        result = this.operand1 / this.operand2;
+        result = this.checkDivisor(this.operand1, this.operand2, 'division');
         break;
       case '%':
-        result = this.operand1 % this.operand2;
+        result = this.checkDivisor(this.operand1, this.operand2, 'remainder');
         break;
       case 'prime':
         result = this.findHighestPrime(this.operand1, this.operand2);
@@ -46,6 +46,22 @@ export class CalculatorComponent {
     };
 
     this.calculations.push(calculation);
+  }
+
+  private checkDivisor(dividend: number, divisor: number, operation: 'division' | 'remainder'): number | string {
+    if (divisor !== 0) {
+      if (operation === 'division') {
+        const result = dividend / divisor;
+        return result;
+      } else if (operation === 'remainder') {
+        const result = dividend % divisor;
+        return result;
+      } else {
+        return 'Error: invalid operation!';
+      }
+    } else {
+      return 'Error: division by zero!';
+    }
   }
 
   private findHighestPrime(a: number, b: number): number {
